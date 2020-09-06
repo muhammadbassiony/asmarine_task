@@ -3,7 +3,22 @@ import rospy
 from std_msgs.msg import String
 
 def callback(data):
-    rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
+    #rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
+    print(data.data)
+    msg = " "
+    if(data.data == "1"):
+        msg = "entered state 1"
+    elif(data.data == "2"):
+        msg = "entered state 2"
+    elif(data.data == "3"):
+        msg = "entered state 3"
+    elif(data.data == "4"):
+        msg = "entered state 4"
+    elif(data.data == "5"):
+        msg = "entered state 5"
+
+    print(msg)
+    rospy.loginfo(""+msg)
     
 def listener():
 

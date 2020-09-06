@@ -9,16 +9,12 @@ def talker():
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
         counter = 0
-        while(counter < 6):
+        while(counter < 5):
             counter += 1 
-            rospy.loginfo(counter)
-            pub.publish(counter)
+            rospy.loginfo(str(counter))
+            pub.publish(str(counter))
             rospy.sleep(10.)
 
-#        hello_str = "hello world %s" % rospy.get_time()
-#        rospy.loginfo(hello_str)
-#        pub.publish(hello_str)
-#        rate.sleep()
 
 if __name__ == '__main__':
     try:

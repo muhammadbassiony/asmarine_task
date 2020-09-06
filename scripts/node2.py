@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 import rospy
 from std_msgs.msg import String
+import threading
 
 def callback(data):
     #rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
-    print(data.data)
+    #print(data.data)
     msg = " "
     if(data.data == "1"):
         msg = "entered state 1"
@@ -17,8 +18,12 @@ def callback(data):
     elif(data.data == "5"):
         msg = "entered state 5"
 
-    print(msg)
+    #print(msg)
     rospy.loginfo(""+msg)
+
+def thread_fsm(data):
+    print("entered state %s\t%s" % (str(data.data), threading.current_thread()))
+    rospy.loginfo("entered state %s\t%s" % (str(data.data), threading.current_thread()))
     
 def listener():
 
@@ -29,7 +34,7 @@ def listener():
     # run simultaneously.
     rospy.init_node('node2', anonymous=True)
 
-    rospy.Subscriber("chatter", String, callback)
+    rospy.Subscriber("chatter", String, thread_fsm)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
